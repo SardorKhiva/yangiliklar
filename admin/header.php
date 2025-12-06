@@ -28,10 +28,10 @@
                         <a class="nav-link" href="/admin/category/category.php">Kategoriyalar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/news.php">Yangiliklar</a>
+                        <a class="nav-link" href="/admin/news/news.php">Yangiliklar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/tag.php">Teglar</a>
+                        <a class="nav-link" href="/admin/tags/tag.php">Teglar</a>
                     </li>
                 </ul>
             </div>
