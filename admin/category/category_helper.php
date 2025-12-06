@@ -2,16 +2,16 @@
 /**
  * Foydalanuvchi: User
  * Loyiha nomi: yangiliklar.loc
- * Fayl nomi: db_helper.php
+ * Fayl nomi: category_helper.php
  * Fayl yaratilgan: 05.12.2025 8:15
  * Maqsad: baza bilan ishlovchi funksiyalar
  */
 
-require_once __DIR__ . '/dbconnect.php';
-function getCategoryList(int $page): array
+require_once __DIR__ . '/../../dbconnect.php';
+function getCategoryList(int $page, int $limit = 5): array
 {
     global $pdo;
-    $limit = 5;
+//    $limit = 5;
     $offset = ($page - 1) * $limit;
     try {
         $sql = "SELECT * FROM `category` LIMIT :offset, :limit";
@@ -47,15 +47,28 @@ function addCategory(string $title): void
     }
 }
 
-function getPagination(): int
+function getPagination(int $limit): int
 {
     global $pdo;
-    $limit = 5;
     $sql = "SELECT * FROM `category`";
     $kategoriyalar = $pdo->prepare($sql);
     $kategoriyalar->execute();
     $total_rows = $kategoriyalar->rowCount();
     return ceil($total_rows / $limit);
+}
+
+function totalRows(): int
+{
+    global $pdo;
+    try {
+        $sql = "SELECT COUNT(*) FROM `category`";
+        $kategoriyalar = $pdo->prepare($sql);
+        $kategoriyalar->execute();
+        return $kategoriyalar->fetchColumn();
+    } catch (PDOException $e) {
+        header('Location: /admin/category/category.php');
+        exit;
+    }
 }
 
 
@@ -93,7 +106,6 @@ function deleteCategory(int $id): void
 {
     global $pdo;
     try {
-
         $del_category = "DELETE FROM `category` WHERE `id` = :id";
         $stmt = $pdo->prepare($del_category);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);

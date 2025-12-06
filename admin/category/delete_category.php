@@ -1,7 +1,6 @@
 <?php
-require_once __DIR__ . '/header.php';
-require_once __DIR__ . '/../db_helper.php';
-
+require_once __DIR__ . '/../header.php';
+require_once __DIR__ . '/category_helper.php';
 
 
 if (isset($_GET['id'])) {
@@ -15,13 +14,14 @@ if (isset($_GET['id'])) {
 }
 ?>
     <div class="container">
-        <label for="cat_del_no" class="mt-3 mb-3">Rostdan ham <strong> <?= $title ?></strong> kategoriyasini o'chirmoqchimisiz?
+        <label for="cat_del_no" class="mt-3 mb-3">Rostdan ham <strong> <?= $title ?></strong> kategoriyasini
+            o'chirmoqchimisiz?
             <br>
-            <a href="/admin/delete_category.php?id=<?= $id ?>&confirm=yes"
+            <a href="/admin/category/delete_category.php?id=<?= $id ?>&confirm=yes"
                id="cat_del_yes"
                class="btn btn-danger">Ha
             </a>
-            <a href="/admin/category.php"
+            <a href="/admin/category/category.php"
                id="cat_del_no"
                class="btn btn-primary">Yo'q
             </a>
@@ -29,4 +29,4 @@ if (isset($_GET['id'])) {
     </div>
 
 <?php
-require_once __DIR__ . '/footer.php';
+require_once __DIR__ . '/../footer.php';

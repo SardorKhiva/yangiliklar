@@ -25,7 +25,7 @@
                         <a class="nav-link active" aria-current="page" href="/admin">Asosiy sahifa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/category.php">Kategoriyalar</a>
+                        <a class="nav-link" href="/admin/category/category.php">Kategoriyalar</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/news.php">Yangiliklar</a>

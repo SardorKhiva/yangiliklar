@@ -1,8 +1,8 @@
 <?php
 /** @var object $pdo */
 
-require_once __DIR__ . '/../db_helper.php';
-require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/category_helper.php';
+require_once __DIR__ . '/../header.php';
 
 if (isset($_POST['cat_add']) && isset($_POST['title'])) {
     try {
@@ -30,4 +30,4 @@ if (isset($_POST['cat_add']) && isset($_POST['title'])) {
     </div>
 
 <?php
-require_once __DIR__ . '/footer.php';
+require_once __DIR__ . '/../footer.php';
