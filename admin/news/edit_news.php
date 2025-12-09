@@ -28,13 +28,13 @@ if (isset($_GET['id']) || isset($_POST['id'])) {
     }
 }
 
-// id orqali yangilik yangilash
-if (isset($_POST['news_update'])) {
+// POST dan kelgan id va boshqalar orqali yangilikni yangilash
+if (isset($_POST['news_update'])) {  // agar Saqlash tugmasi bosilsa
     try {
-        $title = trim($_POST['title']);
-        $content = trim($_POST['news_content']);
-        $category_id = trim($_POST['category_id']);
-        $author_id = trim($_POST['author_id']);
+        $title = trim($_POST['title']);  // yangilik yangi sarlavhasi
+        $content = trim($_POST['news_content']); // yangilik yangi  mazmuni
+        $category_id = trim($_POST['category_id']); //  yangi yangilik kategoriya id si
+        $author_id = trim($_POST['author_id']); // yangi muallif id
         $new_image_name = $_FILES['image']['name']; // yangi rasm nomi
         $old_image_name = $_POST['old_image_name'];  // yashirin maydondan eski rasm nomini olish
         // yangi nom bo'sh bo'lsa eski nom, aks holda yangi rasm nomi ishlatilsin
@@ -51,14 +51,6 @@ if (isset($_POST['news_update'])) {
         echo $e->getMessage();
     }
 }
-
-// TODO: category id ni olish kerak, joriy kategoriyani ko'rsatish uchun
-/*
-echo "<br>";
-echo "<pre>";
-print_r(1);
-echo "</pre>";
-*/
 ?>
 
     <div class="container">
