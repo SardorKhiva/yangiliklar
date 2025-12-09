@@ -19,10 +19,22 @@ function getCategoryList(int $page, int $limit = 5): array
         $kategoriyalar->bindValue(':offset', $offset, PDO::PARAM_INT);
         $kategoriyalar->bindValue(':limit', $limit, PDO::PARAM_INT);
         $kategoriyalar->execute();
-        $categoryAll = $kategoriyalar->fetchAll(PDO::FETCH_ASSOC);
-        return $categoryAll;
+        return $kategoriyalar->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         echo $e->getMessage();
+        return [];
+    }
+}
+
+function allCategory(): array
+{
+    global $pdo;
+    try {
+        $sql = "SELECT * FROM `category`";
+        $kategoriyalar = $pdo->prepare($sql);
+        $kategoriyalar->execute();
+        return $kategoriyalar->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException) {
         return [];
     }
 }
@@ -47,7 +59,7 @@ function addCategory(string $title): void
     }
 }
 
-function getPagination(int $limit): int
+function getPaginationCategory(int $limit): int
 {
     global $pdo;
     $sql = "SELECT * FROM `category`";
@@ -57,7 +69,7 @@ function getPagination(int $limit): int
     return ceil($total_rows / $limit);
 }
 
-function totalRows(): int
+function getCategoryTotalRows(): int
 {
     global $pdo;
     try {
@@ -65,22 +77,35 @@ function totalRows(): int
         $kategoriyalar = $pdo->prepare($sql);
         $kategoriyalar->execute();
         return $kategoriyalar->fetchColumn();
-    } catch (PDOException $e) {
+    } catch (PDOException) {
         header('Location: /admin/category/category.php');
         exit;
     }
 }
 
+function getCategoryByNewsTitle(string $title)
+{
+    global $pdo;
+    $sql = "SELECT * FROM `category` WHERE `title` = :title";
+    $kategoriyalar = $pdo->prepare($sql);
+    $kategoriyalar->bindParam(':title', $title);
+    $kategoriyalar->execute();
+    return $kategoriyalar->fetch(PDO::FETCH_ASSOC);
+}
 
 function getCategoryById(int $id)
 {
     global $pdo;
-    $sql = "SELECT * FROM `category` WHERE `id` = :id";
-    $kategoriyalar = $pdo->prepare($sql);
-    $kategoriyalar->bindParam(':id', $id, PDO::PARAM_INT);
-    $kategoriyalar->execute();
-    $category = $kategoriyalar->fetch(PDO::FETCH_ASSOC);
-    return $category;
+    try {
+        $sql = "SELECT * FROM `category` WHERE `id` = :id";
+        $kategoriyalar = $pdo->prepare($sql);
+        $kategoriyalar->bindParam(':id', $id, PDO::PARAM_INT);
+        $kategoriyalar->execute();
+        return $kategoriyalar->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo($e->getMessage());
+        return [];
+    }
 }
 
 function updateCategory(int $id, string $title): void
@@ -89,7 +114,7 @@ function updateCategory(int $id, string $title): void
     try {
         $category_update_sql = "UPDATE `category` SET `title` = :title WHERE `id` = :id";
         $stmt = $pdo->prepare($category_update_sql);
-        $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+        $stmt->bindValue(':title', $title);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         header('Location: /admin/category.php');

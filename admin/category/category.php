@@ -51,7 +51,7 @@ echo "<hr>";
         <!--   Paginatsiya qismi     -->
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-                <?php for ($sahifa = 1; $sahifa <= getPagination($limit); $sahifa++): ?>
+                <?php for ($sahifa = 1; $sahifa <= getPaginationCategory($limit, 'category'); $sahifa++): ?>
                     <li class="page-item">
                         <a class="page-link <?php if ($sahifa == $_GET['page']) echo 'active'; ?>"
                            href="/admin/category/category.php?page= <?= $sahifa; ?>&limit=<?= $limit; ?>"> <?= $sahifa; ?>
@@ -66,7 +66,7 @@ echo "<hr>";
             <select class="form-select" aria-label="Default select example" name="viewItemCount">
                 <option selected>Nechtadan ma'lumot chiqsin</option>
                 <?php for ($sahifa = 1;
-                           $sahifa <= totalRows();
+                           $sahifa <= getCategoryTotalRows();
                            $sahifa++): ?>
                     <option value="<?= $sahifa; ?>"
                             <?php if ($sahifa == $limit): ?>selected<?php endif; ?>>
