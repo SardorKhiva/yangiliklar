@@ -17,8 +17,6 @@ if (!is_dir($upload_dir)) {
 if (isset($_GET['id']) || isset($_POST['id'])) {
     $id = (int)($_GET['id'] ?? $_POST['id'] ?? 0);
     if ($id > 0) {
-        $category_name = getCategoryById($id);
-        $category_name = $category_name['title'];
         $news_row = getNewsById($id); // shu id dagi yangilik massivi
         $news_content = $news_row['content'];  // shu id dagi yangilik matni
         $title = $news_row['title'];  // tahrirlanayotgan yangilik sarlavhasi
@@ -58,7 +56,7 @@ if (isset($_POST['news_update'])) {
 /*
 echo "<br>";
 echo "<pre>";
-print_r($news_category_id);
+print_r(1);
 echo "</pre>";
 */
 ?>
