@@ -70,7 +70,7 @@ echo "</pre>";
 
                     <!-- Tahrirlanayotgan yangilik id si -->
                     <div class="mb-3 form-control bg-danger-subtle">
-                        <label class="form-label">ID: </label>
+                        <label class="form-label">Yangilik ID: </label>
                         <?= $id; ?>
                         <input type="hidden" name="id" value="<?= $id ?? 0 ?>">
                     </div>
